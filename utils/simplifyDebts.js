@@ -1,5 +1,5 @@
 export function simplifyDebts(expenses) {
-  let netBalance = {};
+  if (!expenses || expenses.length === 0) return [];
 
   for (const expense of expenses) {
     const { paidBy, amount, splitBetween } = expense;
