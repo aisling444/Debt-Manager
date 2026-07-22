@@ -6,7 +6,18 @@ function DebtList() {
   const expenses = useStore((state) => state.expenses)
   const settleDebt = useStore((state) => state.settleDebt)
 
-  const debts = simplifyDebts(expenses)
+  const settlements = useStore((state) => state.settlements)
+
+  const adjustedExpenses = [
+    ...expenses,
+    ...settlements.map(s => ({
+      paidBy: s.to,
+      amount: s.amount,
+      splitBetween: [s.from, s.to]
+  }))
+]
+
+const debts = simplifyDebts(adjustedExpenses)
 
   return (
   <div>
