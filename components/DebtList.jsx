@@ -8,6 +8,8 @@ function DebtList() {
 
   const settlements = useStore((state) => state.settlements)
 
+  console.log(settlements)
+
   const adjustedExpenses = [
     ...expenses,
     ...settlements.map(s => ({
