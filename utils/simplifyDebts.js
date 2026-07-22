@@ -1,6 +1,7 @@
 export function simplifyDebts(expenses) {
   if (!expenses || expenses.length === 0) return [];
 
+  let netBalance = {};
   for (const expense of expenses) {
     const { paidBy, amount, splitBetween } = expense;
     const share = amount / splitBetween.length;
