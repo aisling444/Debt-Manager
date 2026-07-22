@@ -15,7 +15,7 @@ function DebtList() {
     ...settlements.map(s => ({
       paidBy: s.from,
       amount: s.amount,
-      splitBetween: [s.from, s.to],
+      splitBetween: [s.from],
   }))
 ]
 
