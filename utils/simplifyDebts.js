@@ -5,16 +5,19 @@ export function simplifyDebts(expenses) {
   for (const expense of expenses) {
     const { paidBy, amount, splitBetween } = expense;
     const share = amount / splitBetween.length;
-    if (netBalance[paidBy] === undefined) {
-      netBalance[paidBy] = 0;
-    }
+    if (netBalance[paidBy] === undefined) netBalance[paidBy] = 0;
     netBalance[paidBy] += amount;
     for (const person of splitBetween) {
-      if (netBalance[person] === undefined) {
-        netBalance[person] = 0;
-      }
+      if (netBalance[person] === undefined) netBalance[person] = 0;
       netBalance[person] -= share;
     }
+  }
+  
+  for (const s of settlements) {
+    if (netBalance[s.from] === undefined) netBalance[s.from] = 0;
+    if (netBalance[s.to] === undefined) netBalance[s.to] = 0;
+    netBalance[s.from] += s.amount;
+    netBalance[s.to] -= s.amount;
   }
 
   const debts = [];
