@@ -1,4 +1,4 @@
-export function simplifyDebts(expenses) {
+export function simplifyDebts(expenses, settlements = []) {
   if (!expenses || expenses.length === 0) return [];
 
   let netBalance = {};
@@ -12,7 +12,7 @@ export function simplifyDebts(expenses) {
       netBalance[person] -= share;
     }
   }
-  
+
   for (const s of settlements) {
     if (netBalance[s.from] === undefined) netBalance[s.from] = 0;
     if (netBalance[s.to] === undefined) netBalance[s.to] = 0;
