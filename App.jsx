@@ -1,5 +1,6 @@
 import GroupSetup from './components/GroupSetup'
 import ExpenseLogger from './components/ExpenseLogger'
+import DebtList from './components/DebtList'
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <h1>Bill Splitter</h1>
       <GroupSetup />
       <ExpenseLogger />
+      <DebtList />
     </div>
   )
 }
