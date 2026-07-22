@@ -6,10 +6,7 @@ function DebtList() {
   const people = useStore((state) => state.people)
   const expenses = useStore((state) => state.expenses)
   const settleDebt = useStore((state) => state.settleDebt)
-
   const settlements = useStore((state) => state.settlements)
-
-  console.log(settlements)
 
   const adjustedExpenses = [
     ...expenses,
@@ -17,36 +14,28 @@ function DebtList() {
       paidBy: s.from,
       amount: s.amount,
       splitBetween: [s.from],
-  }))
-]
+    }))
+  ]
 
-const debts = simplifyDebts(adjustedExpenses)
+  const debts = simplifyDebts(adjustedExpenses)
 
   return (
-  <div>
-    {debts.map((debt, index) => {
-      const fromPerson = people.find((person) => person.id === debt.from)
-      const toPerson = people.find((person) => person.id === debt.to)
-      return (
-        <DebtRow
-          key={index}
-          debt={debt}
-          fromName={fromPerson?.name}
-          toName={toPerson?.name}
-          onSettle={(amount) => settleDebt({ from: debt.from, to: debt.to, amount })}
-    />
+    <div>
+      {debts.map((debt, index) => {
+        const fromPerson = people.find((person) => person.id === debt.from)
+        const toPerson = people.find((person) => person.id === debt.to)
+        return (
+          <DebtRow
+            key={index}
+            debt={debt}
+            fromName={fromPerson?.name}
+            toName={toPerson?.name}
+            onSettle={(amount) => settleDebt({ from: debt.from, to: debt.to, amount })}
+          />
+        )
+      })}
+    </div>
   )
-})}
-      return (
-        <div key={index}>
-          <span>{fromPerson?.name} owes {toPerson?.name}: €{debt.amount.toFixed(2)}</span>
-          <button onClick={() => settleDebt({ from: debt.from, to: debt.to, amount: debt.amount })}>
-            Settle
-          </button>
-        </div>
-      )
-  </div>
-)
 }
 
 export default DebtList
