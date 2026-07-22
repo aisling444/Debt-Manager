@@ -1,5 +1,6 @@
 import useStore from '../store/useStore'
 import { simplifyDebts } from '../utils/simplifyDebts'
+import DebtRow from './DebtRow'
 
 function DebtList() {
   const people = useStore((state) => state.people)
@@ -27,6 +28,16 @@ const debts = simplifyDebts(adjustedExpenses)
       const fromPerson = people.find((person) => person.id === debt.from)
       const toPerson = people.find((person) => person.id === debt.to)
       return (
+        <DebtRow
+          key={index}
+          debt={debt}
+          fromName={fromPerson?.name}
+          toName={toPerson?.name}
+          onSettle={(amount) => settleDebt({ from: debt.from, to: debt.to, amount })}
+    />
+  )
+})}
+      return (
         <div key={index}>
           <span>{fromPerson?.name} owes {toPerson?.name}: €{debt.amount.toFixed(2)}</span>
           <button onClick={() => settleDebt({ from: debt.from, to: debt.to, amount: debt.amount })}>
@@ -34,7 +45,6 @@ const debts = simplifyDebts(adjustedExpenses)
           </button>
         </div>
       )
-    })}
   </div>
 )
 }
