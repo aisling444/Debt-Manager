@@ -11,7 +11,7 @@ function DebtList() {
   const adjustedExpenses = [
     ...expenses,
     ...settlements.map(s => ({
-      paidBy: s.from,
+      paidBy: s.to,
       amount: s.amount,
       splitBetween: [s.from],
     }))
