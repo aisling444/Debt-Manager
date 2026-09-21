@@ -11,7 +11,7 @@ function ExpenseLogger() {
   const [splitBetween, setSplitBetween] = useState([])
 
   return (
-    <div className="rounded-2xl border-2 border-[#4B2475] bg-[#F5EEFC] p-6 shadow-[5px_5px_0px_#4B2475]">
+    <div className="rounded-2xl bg-white/70 backdrop-blur-sm p-6 shadow-sm border border-[#DCC8F0]">
       <h2 className="mb-4 text-xl font-bold text-[#35145F]">
         Add Expense
       </h2>

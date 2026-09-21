@@ -15,7 +15,7 @@ function DebtRow({ debt, fromName, toName, onSettle }) {
       <div className="flex gap-2">
         <input
           type="number"
-          value={payAmount}
+          value={payAmount.toFixed(2)}
           onChange={(e) => setPayAmount(parseFloat(e.target.value))}
           max={debt.amount}
           className="w-28 rounded-lg border-2 border-[#6B3A91] bg-white px-3 py-2 text-[#35145F] outline-none focus:border-[#35145F]"

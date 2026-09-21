@@ -6,10 +6,10 @@ export function simplifyDebts(expenses, settlements = []) {
     const { paidBy, amount, splitBetween } = expense;
     const share = amount / splitBetween.length;
     if (netBalance[paidBy] === undefined) netBalance[paidBy] = 0;
-    netBalance[paidBy] += amount;
+    netBalance[paidBy] = Math.round((netBalance[paidBy] + amount) * 100) / 100;
     for (const person of splitBetween) {
       if (netBalance[person] === undefined) netBalance[person] = 0;
-      netBalance[person] -= share;
+      netBalance[person] = Math.round((netBalance[person] - share) * 100) / 100;
     }
   }
 
@@ -28,8 +28,8 @@ export function simplifyDebts(expenses, settlements = []) {
     const amount = Math.min(netBalance[maxCreditor], -netBalance[maxDebtor]);
     if(amount === 0) break;
     debts.push({ from: maxDebtor, to: maxCreditor, amount });
-    netBalance[maxCreditor] -= amount;
-    netBalance[maxDebtor] += amount;
+    netBalance[maxCreditor] = Math.round((netBalance[maxCreditor] - amount) * 100) / 100
+    netBalance[maxDebtor] = Math.round((netBalance[maxDebtor] + amount) * 100) / 100;
   }
   return debts;
 }

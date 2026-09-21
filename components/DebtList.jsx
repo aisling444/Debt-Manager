@@ -11,7 +11,9 @@ function DebtList() {
   const debts = simplifyDebts(expenses, settlements)
 
   return (
-    <div>
+    <div className="rounded-2xl bg-white/70 backdrop-blur-sm p-6 shadow-sm border border-[#DCC8F0]">
+      <h2 className="mb-4 text-xl font-bold text-[#35145F]">Debts</h2>
+      <div className="flex flex-col gap-3">
       {debts.map((debt, index) => {
         const fromPerson = people.find((person) => person.id === debt.from)
         const toPerson = people.find((person) => person.id === debt.to)
@@ -25,6 +27,7 @@ function DebtList() {
           />
         )
       })}
+      </div>
     </div>
   )
 }
